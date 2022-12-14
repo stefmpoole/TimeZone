@@ -4,7 +4,7 @@ let displayTime = document.querySelector("#time");
 
 function showSelectedCity(event) {
   if (event.target.value.length > 0) {
-    let currentTime = moment().tz(event.target.value).format("hh:mm A");
+    let currentTime = moment().tz(event.target.value).format("hh:mm:ss A");
     let currentDate = moment()
       .tz(event.target.value)
       .format("dddd, MMMM Do YYYY");
