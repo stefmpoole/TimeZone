@@ -1,26 +1,15 @@
 let citySelect = document.querySelector("#cities");
-
-let newYorkTime = moment()
-  .tz("America/New_York")
-  .format("[It is] dddd, MMMM Do YYYY hh:mm A [in America/New York]");
-
-let athensTime = moment()
-  .tz("Europe/Athens")
-  .format("[It is] dddd, MMMM Do YYYY hh:mm A [in Greece/Athens]");
-
-let sanFranciscoTime = moment()
-  .tz("US/Pacific")
-  .format("[It is] dddd, MMMM Do YYYY hh:mm A [in America/San Francisco]");
+let displayDate = document.querySelector("#date");
+let displayTime = document.querySelector("#time");
 
 function showSelectedCity(event) {
-  if (event.target.value === "new-york") {
-    alert(newYorkTime);
-  }
-  if (event.target.value === "athens") {
-    alert(athensTime);
-  }
-  if (event.target.value === "san-francisco") {
-    alert(sanFranciscoTime);
+  if (event.target.value.length > 0) {
+    let currentTime = moment().tz(event.target.value).format("hh:mm A");
+    let currentDate = moment()
+      .tz(event.target.value)
+      .format("dddd, MMMM Do YYYY");
+    displayDate.innerHTML = `${currentDate}`;
+    displayTime.innerHTML = `${currentTime}`;
   }
 }
 
