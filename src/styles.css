@@ -1,0 +1,8 @@
+#cities {
+  display: block;
+  margin: 25px;
+  padding: 5px 7px;
+  font-size: 17px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  border-radius: 10px;
+}
