@@ -36,13 +36,23 @@ setInterval(displayTime, 1);
 let citySelect = document.querySelector("#cities");
 
 function showSelectedCity(event) {
-  if (event.target.value.length > 0) {
-    let currentTime = moment().tz(event.target.value).format("hh:mm:ss A");
-    let currentDate = moment()
-      .tz(event.target.value)
-      .format("dddd, MMMM Do YYYY");
-    alert(currentDate);
-    alert(currentTime);
+  let selectedLocation = document.querySelector("#location");
+  let place = event.target.value;
+  let cityName = place.replace("_", " ").split("/")[1];
+
+  if (place.length > 0) {
+    let currentTime = moment()
+      .tz(place)
+      .format("hh:mm:ss [<small>]A[</small>]");
+    let currentDate = moment().tz(place).format("dddd, MMMM Do YYYY");
+
+    selectedLocation.innerHTML = ` <div class="displayCities">
+            <div>
+            <h2>${cityName}</h2>
+              <div class="date"><h2 id="date">${currentDate}</h2></div>
+            </div>
+            <div class="time"><h4 id="time">${currentTime}</h4></div>
+          </div>`;
   }
 }
 
