@@ -30,9 +30,6 @@ function displayTime() {
   );
 }
 
-displayTime();
-setInterval(displayTime, 1000);
-
 function showSelectedCity(event) {
   let citySelection = event.target.value;
   let cityName = citySelection.replace("_", " ").split("/")[1];
@@ -45,17 +42,18 @@ function showSelectedCity(event) {
 }
 
 function setCityInterval(citySelection, cityName) {
+  let selectedLocation = document.querySelector("#location");
+  let currentDate = moment().tz(citySelection).format("dddd, MMMM Do YYYY");
+  let currentTime = moment()
+    .tz(citySelection)
+    .format("hh:mm:ss [<small>]A[</small>]");
+
   if (citySelection === "current") {
-    place = moment.tz.guess();
+    citySelection = moment.tz.guess();
+    cityName = citySelection.replace("_", " ").split("/")[1];
   }
 
   if (citySelection.length > 0) {
-    let currentTime = moment()
-      .tz(citySelection)
-      .format("hh:mm:ss [<small>]A[</small>]");
-    let selectedLocation = document.querySelector("#location");
-    let currentDate = moment().tz(citySelection).format("dddd, MMMM Do YYYY");
-
     selectedLocation.innerHTML = ` <div class="displayCities">
             <div>
             <h2>${cityName}</h2>
@@ -69,6 +67,8 @@ function setCityInterval(citySelection, cityName) {
 }
 
 let interval;
+displayTime();
+interval = setInterval(displayTime, 1000);
 
 let citySelect = document.querySelector("#cities");
 citySelect.addEventListener("change", showSelectedCity);
