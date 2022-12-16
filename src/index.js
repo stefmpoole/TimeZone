@@ -31,20 +31,30 @@ function displayTime() {
 }
 
 displayTime();
-setInterval(displayTime, 1);
-
-let citySelect = document.querySelector("#cities");
+setInterval(displayTime, 1000);
 
 function showSelectedCity(event) {
-  let selectedLocation = document.querySelector("#location");
-  let place = event.target.value;
-  let cityName = place.replace("_", " ").split("/")[1];
+  let citySelection = event.target.value;
+  let cityName = citySelection.replace("_", " ").split("/")[1];
 
-  if (place.length > 0) {
+  clearInterval(interval);
+
+  interval = setInterval(() => {
+    setCityInterval(citySelection, cityName);
+  }, 1000);
+}
+
+function setCityInterval(citySelection, cityName) {
+  if (citySelection === "current") {
+    place = moment.tz.guess();
+  }
+
+  if (citySelection.length > 0) {
     let currentTime = moment()
-      .tz(place)
+      .tz(citySelection)
       .format("hh:mm:ss [<small>]A[</small>]");
-    let currentDate = moment().tz(place).format("dddd, MMMM Do YYYY");
+    let selectedLocation = document.querySelector("#location");
+    let currentDate = moment().tz(citySelection).format("dddd, MMMM Do YYYY");
 
     selectedLocation.innerHTML = ` <div class="displayCities">
             <div>
@@ -53,7 +63,12 @@ function showSelectedCity(event) {
             </div>
             <div class="time"><h4 id="time">${currentTime}</h4></div>
           </div>`;
+  } else {
+    location.reload();
   }
 }
 
+let interval;
+
+let citySelect = document.querySelector("#cities");
 citySelect.addEventListener("change", showSelectedCity);
