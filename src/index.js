@@ -60,7 +60,8 @@ function setCityInterval(citySelection, cityName) {
               <div class="date"><h2 id="date">${currentDate}</h2></div>
             </div>
             <div class="time"><h4 id="time">${currentTime}</h4></div>
-          </div>`;
+          </div>
+          <a href="/">All cities</a>`;
   } else {
     location.reload();
   }
